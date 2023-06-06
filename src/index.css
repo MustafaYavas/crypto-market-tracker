@@ -1,13 +1,114 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+  --table-default: #2a263e;
+  --table-default-dark: #1b172c;
+  --table-default-hover: #3b3652;
+  --table-red: #ba4444;
+  --table-green: #228822;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--table-default);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--table-default);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--table-default-hover);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body {
+  background-color: #111e36;
+}
+
+.base-container {
+  padding: 0 10rem;
+}
+
+.fill-btn {
+  padding: 1rem 2rem;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 221, 161, 1) 0%,
+    rgba(2, 180, 231, 1) 100%
+  );
+  color: white;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.fill-btn:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 180, 231, 1) 0%,
+    rgba(2, 221, 161, 1) 100%
+  );
+}
+
+.navbar {
+  height: 72px;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+.navbar-logo {
+  width: 48px;
+  height: 48px;
+}
+
+.navbar-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.home-img {
+  width: 90%;
+  height: auto;
+}
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 221, 161, 1) 0%,
+    rgba(2, 180, 231, 1) 50%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text:hover svg {
+  margin-left: 0.25rem;
+  transition: ease-in-out;
+  transition-duration: 0.25s;
+}
+
+@media screen and (max-width: 768px) {
+  .base-container {
+    padding: 0 2rem;
+  }
+
+  .navbar-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .fill-btn {
+    text-align: center;
+  }
 }
