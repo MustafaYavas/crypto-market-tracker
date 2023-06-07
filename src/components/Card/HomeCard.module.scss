@@ -1,0 +1,15 @@
+.home-card {
+  background-color: #051535;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  border: 2px solid #051535;
+  border-radius: 16px;
+  min-height: 275px;
+
+  &:hover {
+    border: 2px solid #1c56c9;
+    transform: scale(1.02);
+    transition: 0.25s;
+  }
+}

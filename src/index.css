@@ -9,6 +9,7 @@ code {
   --table-default-hover: #3b3652;
   --table-red: #ba4444;
   --table-green: #228822;
+  --text-secondary: rgba(255, 255, 255, 0.8);
 }
 
 ::-webkit-scrollbar {
@@ -29,6 +30,10 @@ code {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
 }
 
 body {
@@ -114,6 +119,18 @@ body {
   margin-left: 0.25rem;
   transition: ease-in-out;
   transition-duration: 0.25s;
+}
+
+.letter-space-md {
+  letter-spacing: 0.025em;
+}
+
+.letter-space-lg {
+  letter-spacing: 0.05em;
+}
+
+.letter-space-xl {
+  letter-spacing: 0.1em;
 }
 
 @media screen and (max-width: 768px) {

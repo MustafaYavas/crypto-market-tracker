@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import Dropdown from '../Dropdown/Dropdown';
+import Menu from '../Menu/Menu';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -51,9 +51,9 @@ const Navbar = () => {
         </div>
 
         <div className="d-md-none">
-          <Dropdown
-            items={['Home', 'Dashboard']}
-            links={['/', '/ashboard']}
+          <Menu
+            items={['Home', 'Prices']}
+            links={['/', '/prices']}
             type="link"
           />
         </div>
