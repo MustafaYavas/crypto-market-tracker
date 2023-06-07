@@ -74,16 +74,21 @@ body {
 .navbar-link {
   color: white;
   text-decoration: none;
+  font-weight: 600;
 }
 
 .navbar-link-active {
-  color: white;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 221, 161, 1) 0%,
+    rgba(2, 180, 231, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-decoration: none;
-  border-bottom: 2px solid white;
 }
 
-.navbar-link,
-.navbar-link-active:hover {
+.navbar-link:hover {
   color: rgba(255, 255, 255, 0.8);
   border-bottom-color: rgba(255, 255, 255, 0.8);
 }

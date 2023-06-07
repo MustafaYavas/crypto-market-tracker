@@ -25,7 +25,7 @@ const Navbar = () => {
       <div className="d-flex justify-content-between align-items-center h-100 w-100 base-container">
         <NavLink
           to="/"
-          className="d-flex justify-content-start align-items-center gap-3 navbar-link"
+          className="d-flex justify-content-start align-items-center gap-3 text-light text-decoration-none"
         >
           <img src="/images/site-logo.png" className="navbar-logo" alt="logo" />
           <h1 className="mb-0 fs-3 fs-md-2 font-semibold">CryptoX</h1>
@@ -35,7 +35,7 @@ const Navbar = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? 'navbar-link-active' : 'navbar-link'
+              `navbar-link ${isActive ? 'navbar-link-active' : ''}`
             }
           >
             Home
@@ -43,7 +43,7 @@ const Navbar = () => {
           <NavLink
             to="/prices"
             className={({ isActive }) =>
-              isActive ? 'navbar-link-active' : 'navbar-link'
+              `navbar-link ${isActive ? 'navbar-link-active' : ''}`
             }
           >
             Prices
