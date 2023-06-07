@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import Dropdown from '../Dropdown/Dropdown';
 
@@ -23,36 +23,31 @@ const Navbar = () => {
       className="navbar text-light"
     >
       <div className="d-flex justify-content-between align-items-center h-100 w-100 base-container">
-        <div
-          role="button"
-          className="d-flex justify-content-start align-items-center gap-3"
-          onClick={() => {
-            navigate('/browse');
-          }}
+        <NavLink
+          to="/"
+          className="d-flex justify-content-start align-items-center gap-3 navbar-link"
         >
           <img src="/images/site-logo.png" className="navbar-logo" alt="logo" />
           <h1 className="mb-0 fs-3 fs-md-2 font-semibold">CryptoX</h1>
-        </div>
+        </NavLink>
 
         <div className="d-none d-md-flex justify-content-start align-items-center gap-3">
-          <span
-            role="button"
-            className="navbar-link"
-            onClick={() => {
-              navigate('/browse');
-            }}
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? 'navbar-link-active' : 'navbar-link'
+            }
           >
             Home
-          </span>
-          <span
-            role="button"
-            className="navbar-link"
-            onClick={() => {
-              navigate('/prices');
-            }}
+          </NavLink>
+          <NavLink
+            to="/prices"
+            className={({ isActive }) =>
+              isActive ? 'navbar-link-active' : 'navbar-link'
+            }
           >
             Prices
-          </span>
+          </NavLink>
         </div>
 
         <div className="d-md-none">
