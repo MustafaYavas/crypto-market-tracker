@@ -1,0 +1,14 @@
+.prices-container {
+  margin-top: 5rem;
+
+  .show-btn {
+    button {
+      color: var(--text-secondary);
+      background-color: var(--element-bg);
+      outline: none;
+      border: 1px solid var(--text-secondary);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+    }
+  }
+}

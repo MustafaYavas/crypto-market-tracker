@@ -8,6 +8,7 @@ import {
 import { BiHappyHeartEyes } from 'react-icons/bi';
 import { FaLinkedin } from 'react-icons/fa';
 import { AiFillGithub } from 'react-icons/ai';
+import { BsArrowUpShort, BsArrowDownShort } from 'react-icons/bs';
 
 type Props = {
   name: string;
@@ -76,6 +77,22 @@ const Icon = ({ name, className, size, color }: Props) => {
   } else if (name === 'MdMail') {
     return (
       <MdMail
+        className={className}
+        size={size}
+        color={color ? color : 'black'}
+      />
+    );
+  } else if (name === 'BsArrowUpShort') {
+    return (
+      <BsArrowUpShort
+        className={className}
+        size={size}
+        color={color ? color : 'black'}
+      />
+    );
+  } else if (name === 'BsArrowDownShort') {
+    return (
+      <BsArrowDownShort
         className={className}
         size={size}
         color={color ? color : 'black'}

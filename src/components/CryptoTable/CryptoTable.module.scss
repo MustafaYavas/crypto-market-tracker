@@ -1,0 +1,71 @@
+.crypto-table {
+  background-color: var(--table-default);
+
+  @media screen and (max-width: 1280px) {
+    overflow-x: scroll;
+  }
+
+  .table-header {
+    th {
+      padding: 0.5rem 1rem 1rem 1rem;
+
+      &:hover {
+        background-color: var(--table-default-hover);
+      }
+    }
+
+    .name {
+      width: 200px;
+    }
+
+    svg {
+      visibility: hidden;
+    }
+
+    .market-cap:hover svg {
+      visibility: visible;
+    }
+  }
+
+  .table {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .table-row {
+    td {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+
+      @media screen and (max-width: 1280px) {
+        height: 56px;
+      }
+    }
+
+    .table-row-image {
+      width: 24px;
+      height: 24px;
+
+      @media screen and (max-width: 992px) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &:hover {
+      background-color: var(--table-default-hover);
+    }
+
+    .red {
+      background-color: var(--table-red);
+      color: white !important;
+    }
+
+    .green {
+      background-color: var(--table-green);
+      color: white !important;
+    }
+  }
+}
