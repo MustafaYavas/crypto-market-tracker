@@ -1,0 +1,29 @@
+.footer {
+  background-color: #071020;
+  padding: 4rem 10rem;
+  margin: 1rem 0px 0px 0px !important;
+
+  @media screen and (max-width: 768px) {
+    padding: 4rem 2rem;
+  }
+
+  .connect-box {
+    background-color: #132441;
+    padding: 0.5rem;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: #1ba1e9;
+
+      svg {
+        color: #071020 !important;
+      }
+    }
+  }
+
+  .contact-text {
+    &:hover span {
+      color: #1ba1e9;
+    }
+  }
+}
