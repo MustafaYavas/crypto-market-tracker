@@ -9,10 +9,12 @@ const Prices = () => {
   const [limit, setLimit] = useState<number>(50);
   const [currentTime, setCurrentTime] = useState('');
   const [order, setOrder] = useState('ascending');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
     async function getLatestPrice() {
+      setIsLoading(true);
       const response = await fetch(
         new Request('https://api.livecoinwatch.com/coins/list'),
         {
@@ -32,9 +34,13 @@ const Prices = () => {
         }
       );
 
-      if (!response.ok) throw new Error(response.statusText);
+      if (!response.ok) {
+        setIsLoading(false);
+        throw new Error(response.statusText);
+      }
 
       const datas = await response.json();
+      setIsLoading(false);
       setCurrentTime(getCurrentHour());
       setCryptos(datas);
       timeoutId = setTimeout(getLatestPrice, 15000);
@@ -68,15 +74,14 @@ const Prices = () => {
         <h4 className="text-white fs-3 mb-0">Top Coins by Market Cap</h4>
       </div>
 
-      {cryptos.length > 0 && (
-        <CryptoTable
-          cryptos={cryptos}
-          limit={limit}
-          currentTime={currentTime}
-          order={order}
-          changeOrder={changeOrder}
-        />
-      )}
+      <CryptoTable
+        cryptos={cryptos}
+        limit={limit}
+        currentTime={currentTime}
+        order={order}
+        changeOrder={changeOrder}
+        isLoading={isLoading}
+      />
 
       <div className={`mb-5 text-center ${styles['show-btn']}`}>
         {limit < 500 && (
