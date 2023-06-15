@@ -3,55 +3,25 @@ import { useEffect, useState } from 'react';
 import CryptoTable from '../../components/CryptoTable/CryptoTable';
 import styles from './Prices.module.scss';
 import { getCurrentHour } from '../../helpers/date';
+import { handleGetCryptos } from '../../store/saga/Api';
+import { useAppDispatch } from '../../App';
 
 const Prices = () => {
-  const [cryptos, setCryptos] = useState<CryptoCurrency[]>([]);
   const [limit, setLimit] = useState<number>(50);
-  const [currentTime, setCurrentTime] = useState('');
+  const [currentTime, setCurrentTime] = useState(getCurrentHour());
   const [order, setOrder] = useState('ascending');
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
+
+  handleGetCryptos(order, dispatch);
 
   useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>;
-    async function getLatestPrice() {
-      setIsLoading(true);
-      const response = await fetch(
-        new Request('https://api.livecoinwatch.com/coins/list'),
-        {
-          method: 'POST',
-          headers: new Headers({
-            'content-type': 'application/json',
-            'x-api-key': process.env.REACT_APP_API_KEY!,
-          }),
-          body: JSON.stringify({
-            currency: 'USD',
-            sort: 'rank',
-            order: order,
-            offset: 0,
-            limit: 500,
-            meta: true,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        setIsLoading(false);
-        throw new Error(response.statusText);
-      }
-
-      const datas = await response.json();
-      setIsLoading(false);
+    const timeout = setInterval(() => {
       setCurrentTime(getCurrentHour());
-      setCryptos(datas);
-      timeoutId = setTimeout(getLatestPrice, 15000);
-    }
+      handleGetCryptos(order, dispatch);
+    }, 15000);
 
-    getLatestPrice();
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [order]);
+    return () => clearTimeout(timeout);
+  }, [dispatch, order]);
 
   const handleIncreaseLimit = () => {
     setLimit((prev) => prev + 50);
@@ -75,12 +45,10 @@ const Prices = () => {
       </div>
 
       <CryptoTable
-        cryptos={cryptos}
         limit={limit}
         currentTime={currentTime}
         order={order}
         changeOrder={changeOrder}
-        isLoading={isLoading}
       />
 
       <div className={`mb-5 text-center ${styles['show-btn']}`}>

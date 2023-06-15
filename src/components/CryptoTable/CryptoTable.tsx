@@ -1,7 +1,10 @@
+import { RootState } from '../../store/configureStore';
 import Icon from '../Icon/Icon';
 import LoadingSkeleton from '../LoadingSkeleton/LoadingSkeleton';
 import styles from './CryptoTable.module.scss';
 import CryptoTableDatas from './CryptoTableDatas';
+
+import { connect } from 'react-redux';
 
 type CryptoTableProps = {
   cryptos: CryptoCurrency[];
@@ -9,7 +12,6 @@ type CryptoTableProps = {
   currentTime: string;
   order: string;
   changeOrder: () => void;
-  isLoading: boolean;
 };
 
 const CryptoTable = ({
@@ -18,11 +20,10 @@ const CryptoTable = ({
   currentTime,
   order,
   changeOrder,
-  isLoading,
 }: CryptoTableProps) => {
   return (
     <>
-      {isLoading && cryptos.length === 0 && (
+      {cryptos.length === 0 && (
         <div className="my-5 overflow-hidden">
           <LoadingSkeleton width={1500} height={750} />
         </div>
@@ -70,7 +71,7 @@ const CryptoTable = ({
               </tr>
             </thead>
 
-            <CryptoTableDatas cryptos={cryptos} limit={limit} />
+            <CryptoTableDatas limit={limit} />
           </table>
         </div>
       )}
@@ -78,4 +79,10 @@ const CryptoTable = ({
   );
 };
 
-export default CryptoTable;
+const mapStateToProps = (state: RootState) => {
+  return {
+    cryptos: state.cryptos.cryptos,
+  };
+};
+
+export default connect(mapStateToProps)(CryptoTable);

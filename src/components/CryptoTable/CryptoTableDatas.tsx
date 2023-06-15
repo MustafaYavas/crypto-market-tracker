@@ -4,6 +4,9 @@ import {
   formatPercentage,
   formatPrice,
 } from '../../helpers/formats';
+import { RootState } from '../../store/configureStore';
+
+import { connect } from 'react-redux';
 
 type CryptoTableDatasProps = {
   cryptos: CryptoCurrency[];
@@ -69,4 +72,10 @@ const CryptoTableDatas = ({ cryptos, limit }: CryptoTableDatasProps) => {
   );
 };
 
-export default CryptoTableDatas;
+const mapStateToProps = (state: RootState) => {
+  return {
+    cryptos: state.cryptos.cryptos,
+  };
+};
+
+export default connect(mapStateToProps)(CryptoTableDatas);
