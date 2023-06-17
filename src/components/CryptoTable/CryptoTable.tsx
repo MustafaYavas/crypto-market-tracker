@@ -36,7 +36,9 @@ const CryptoTable = ({
       {!searchText && cryptos.length > 0 && (
         <div className={`${styles['crypto-table']} my-5`}>
           <div className="pt-2 d-flex justify-content-between align-items-center mx-4">
-            <h3 className="text-white text-xl font-semibold">Prices</h3>
+            <h3 className="d-none d-md-inline text-white text-xl font-semibold">
+              Prices
+            </h3>
 
             <p className="text-light text-end m-0">
               Last update: {currentTime}

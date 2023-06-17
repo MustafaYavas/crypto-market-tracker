@@ -44,11 +44,13 @@ const Prices = ({ searchText }: PricesProps) => {
 
   return (
     <div className={`base-container ${styles['prices-container']}`}>
-      <div className="text-center">
-        <h2 className="text-white fs-2 fw-bolder">
+      <div className="d-flex flex-column justify-content-center align-items-center w-100">
+        <span className="text-white text-md-danger fs-4 fw-bolder">
           Cryptocurrency Prices Live
-        </h2>
-        <h4 className="text-white fs-3 mb-0">Top Coins by Market Cap</h4>
+        </span>
+        <span className="d-none d-md-inline text-white fs-5 mb-0">
+          Top Coins by Market Cap
+        </span>
       </div>
 
       <Search />
