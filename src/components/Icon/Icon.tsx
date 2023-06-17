@@ -11,6 +11,7 @@ import {
   AiFillGithub,
   AiOutlineSearch,
   AiFillCloseCircle,
+  AiOutlineClose,
 } from 'react-icons/ai';
 import { BsArrowUpShort, BsArrowDownShort } from 'react-icons/bs';
 
@@ -113,6 +114,14 @@ const Icon = ({ name, className, size, color }: Props) => {
   } else if (name === 'AiFillCloseCircle') {
     return (
       <AiFillCloseCircle
+        className={className}
+        size={size}
+        color={color ? color : 'black'}
+      />
+    );
+  } else if (name === 'AiOutlineClose') {
+    return (
+      <AiOutlineClose
         className={className}
         size={size}
         color={color ? color : 'black'}

@@ -41,3 +41,11 @@ type CryptoCurrency = {
     year: number;
   };
 };
+
+type SingleCryptoHistoryDatas = {
+  date: number;
+  rate: number;
+  volume: number;
+  cap: number;
+  liquidity: number;
+};

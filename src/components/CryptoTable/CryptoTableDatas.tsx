@@ -4,6 +4,9 @@ import {
   formatPercentage,
   formatPrice,
 } from '../../helpers/formats';
+import { useAppDispatch } from '../../App';
+import { toogleModal } from '../../store/slices/Modal';
+import { handleGetSingleCrypto } from '../../store/saga/Api';
 
 type CryptoTableDatasProps = {
   cryptos: CryptoCurrency[];
@@ -11,6 +14,7 @@ type CryptoTableDatasProps = {
 };
 
 const CryptoTableDatas = ({ cryptos, limit }: CryptoTableDatasProps) => {
+  const dispatch = useAppDispatch();
   const setChar = (rate: number) => {
     if (rate > 1) return '+';
     else if (rate === 1) return '';
@@ -23,6 +27,10 @@ const CryptoTableDatas = ({ cryptos, limit }: CryptoTableDatasProps) => {
     else return styles.red;
   };
 
+  const handleOpenModal = (code: string) => {
+    handleGetSingleCrypto(code, dispatch);
+    dispatch(toogleModal(true));
+  };
   return (
     <tbody>
       {cryptos.slice(0, limit).map((crypto) => (
@@ -30,12 +38,10 @@ const CryptoTableDatas = ({ cryptos, limit }: CryptoTableDatasProps) => {
           key={crypto.code}
           className={`text-center ${styles['table-row']}`}
           style={{ color: 'var(--text-secondary)' }}
+          onClick={() => handleOpenModal(crypto.code)}
+          role="button"
         >
-          <td
-            className="d-flex align-items-center gap-2 text-start"
-            role={crypto?.links?.website && 'button'}
-            onClick={() => window.open(crypto?.links?.website)}
-          >
+          <td className="d-flex align-items-center gap-2 text-start">
             <img
               className={styles['table-row-image']}
               src={crypto.png32}

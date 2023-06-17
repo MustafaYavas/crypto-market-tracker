@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../App';
 import Search from '../../components/Search/Search';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
+import CryptoModal from '../../components/CryptoModal/CryptoModal';
 
 type PricesProps = {
   searchText: string;
@@ -72,6 +73,8 @@ const Prices = ({ searchText }: PricesProps) => {
           )}
         </div>
       )}
+
+      <CryptoModal />
     </div>
   );
 };
@@ -79,6 +82,7 @@ const Prices = ({ searchText }: PricesProps) => {
 const mapStateToProps = (state: RootState) => {
   return {
     searchText: state.cryptos.searchText,
+    isOpen: state.modal.isOpen,
   };
 };
 
