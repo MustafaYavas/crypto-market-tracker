@@ -1,3 +1,4 @@
+import { filter } from '../../helpers/dataFunctions/filterCryptos';
 import { AppDispatch } from '../configureStore';
 import { fetchCryptos, setSearchedCryptosAfterUpdate } from '../slices/Crypto';
 
@@ -32,9 +33,7 @@ export const handleGetCryptos = async (
   const datas = await response.json();
   dispatch(fetchCryptos(datas));
   if (searchText) {
-    const searchedArray = datas.filter((crypto: CryptoCurrency) =>
-      crypto.name.toLowerCase().includes(searchText.toLowerCase())
-    );
+    const searchedArray = filter(datas, searchText);
     dispatch(setSearchedCryptosAfterUpdate(searchedArray));
   }
   return datas;

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { RootState } from '../../store/configureStore';
 import Icon from '../Icon/Icon';
 import LoadingSkeleton from '../LoadingSkeleton/LoadingSkeleton';
@@ -26,15 +25,6 @@ const CryptoTable = ({
   searchText,
   searchedCryptos,
 }: CryptoTableProps) => {
-  // const [filteredCryptos, setFilteredCryptos] = useState<CryptoCurrency[]>([]);
-
-  // useEffect(() => {
-  //   const filteredResults = cryptos.filter((crypto) =>
-  //     crypto.name.toLowerCase().includes(searchText.toLowerCase())
-  //   );
-  //   setFilteredCryptos(filteredResults);
-  // }, [searchText, cryptos]);
-
   return (
     <>
       {cryptos.length === 0 && (

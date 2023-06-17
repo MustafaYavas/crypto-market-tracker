@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { filter } from '../../helpers/dataFunctions/filterCryptos';
 
 type cryptoState = {
   cryptos: CryptoCurrency[];
@@ -23,9 +24,7 @@ const cryptoSlice = createSlice({
     searchCrypto: (state, action: PayloadAction<string>) => {
       const key = action.payload;
       state.searchText = key;
-      state.searchedCryptos = state.cryptos.filter((crypto) =>
-        crypto.name.toLowerCase().includes(state.searchText.toLowerCase())
-      );
+      state.searchedCryptos = filter(state.cryptos, state.searchText);
     },
     setSearchedCryptosAfterUpdate: (
       state,
