@@ -1,8 +1,9 @@
 import { AppDispatch } from '../configureStore';
-import { fetchCryptos } from '../slices/Crypto';
+import { fetchCryptos, setSearchedCryptosAfterUpdate } from '../slices/Crypto';
 
 export const handleGetCryptos = async (
   order: string,
+  searchText: string,
   dispatch: AppDispatch
 ) => {
   const response = await fetch(
@@ -30,5 +31,11 @@ export const handleGetCryptos = async (
 
   const datas = await response.json();
   dispatch(fetchCryptos(datas));
+  if (searchText) {
+    const searchedArray = datas.filter((crypto: CryptoCurrency) =>
+      crypto.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    dispatch(setSearchedCryptosAfterUpdate(searchedArray));
+  }
   return datas;
 };

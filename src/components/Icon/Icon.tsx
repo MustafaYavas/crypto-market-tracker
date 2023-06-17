@@ -7,7 +7,11 @@ import {
 } from 'react-icons/md';
 import { BiHappyHeartEyes } from 'react-icons/bi';
 import { FaLinkedin } from 'react-icons/fa';
-import { AiFillGithub } from 'react-icons/ai';
+import {
+  AiFillGithub,
+  AiOutlineSearch,
+  AiFillCloseCircle,
+} from 'react-icons/ai';
 import { BsArrowUpShort, BsArrowDownShort } from 'react-icons/bs';
 
 type Props = {
@@ -93,6 +97,22 @@ const Icon = ({ name, className, size, color }: Props) => {
   } else if (name === 'BsArrowDownShort') {
     return (
       <BsArrowDownShort
+        className={className}
+        size={size}
+        color={color ? color : 'black'}
+      />
+    );
+  } else if (name === 'AiOutlineSearch') {
+    return (
+      <AiOutlineSearch
+        className={className}
+        size={size}
+        color={color ? color : 'black'}
+      />
+    );
+  } else if (name === 'AiFillCloseCircle') {
+    return (
+      <AiFillCloseCircle
         className={className}
         size={size}
         color={color ? color : 'black'}
