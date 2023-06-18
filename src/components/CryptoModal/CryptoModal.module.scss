@@ -1,11 +1,42 @@
 .modal {
   .title {
-    font-size: 20px;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+
+    @media screen and (min-width: 768px) {
+      justify-content: flex-start;
+    }
   }
 
   .title-info {
-    font-size: 14px;
-    margin-top: 2px;
-    margin-left: 8px;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (min-width: 768px) {
+      margin-left: 8px;
+      margin-top: 3px;
+    }
+  }
+
+  .crypto-sub-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    &-title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    &-text {
+      font-size: 14px;
+      font-weight: 600;
+    }
   }
 }

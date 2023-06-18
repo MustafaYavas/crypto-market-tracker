@@ -14,7 +14,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { getDateFromMs } from '../../helpers/date';
-import { formatPrice } from '../../helpers/formats';
+import { formatCap, formatPrice } from '../../helpers/formats';
 import styles from './CryptoModal.module.scss';
 import Icon from '../Icon/Icon';
 
@@ -22,13 +22,22 @@ type CryptoModalProps = {
   isOpen: boolean;
   modalData: SingleCryptoHistoryDatas[];
   cryptoName: string;
+  cryptos: CryptoCurrency[];
 };
 
-const CryptoModal = ({ isOpen, modalData, cryptoName }: CryptoModalProps) => {
+const CryptoModal = ({
+  isOpen,
+  modalData,
+  cryptoName,
+  cryptos,
+}: CryptoModalProps) => {
   const dispatch = useAppDispatch();
 
-  let modalFormattedDatas = [];
+  const cryptoInfos = cryptos.find((c) => {
+    if (c.code === cryptoName) return c;
+  });
 
+  let modalFormattedDatas = [];
   modalFormattedDatas = modalData?.map((data) => {
     return {
       name: getDateFromMs(data.date),
@@ -48,22 +57,87 @@ const CryptoModal = ({ isOpen, modalData, cryptoName }: CryptoModalProps) => {
     >
       <Modal.Header className="d-flex justify-content-between align-items-center">
         <Modal.Title className="d-flex justify-content-center align-items-center">
-          <span className={styles.title}>{cryptoName} Market Datas </span>
-          <span className={styles['title-info']}>
-            (<span>{modalFormattedDatas[0]?.name} - </span>
-            <span>
-              {modalFormattedDatas[modalFormattedDatas?.length - 1]?.name}
+          <div className="d-none d-md-flex justify-content-center align-items-center">
+            <span
+              className={styles.title}
+              role="button"
+              onClick={() => window.open(cryptoInfos?.links.website)}
+            >
+              <img
+                width={20}
+                height={20}
+                src={cryptoInfos?.png32}
+                alt="crypto-img"
+              />
+              {cryptoInfos?.name}
             </span>
-            )
-          </span>
+            <span className={styles['title-info']}>
+              (<span>{modalFormattedDatas[0]?.name}</span>
+              <span className="mx-1">—</span>
+              <span>
+                {modalFormattedDatas[modalFormattedDatas?.length - 1]?.name}
+              </span>
+              )
+            </span>
+          </div>
+          <div className="d-flex flex-column justify-content-center align-items-start d-md-none">
+            <span
+              className={styles.title}
+              role="button"
+              onClick={() => window.open(cryptoInfos?.links.website)}
+            >
+              <img
+                width={20}
+                height={20}
+                src={cryptoInfos?.png32}
+                alt="crypto-img"
+              />
+              {cryptoInfos?.name}
+            </span>
+            <span className={styles['title-info']}>
+              (<span>{modalFormattedDatas[0]?.name}</span>
+              <span className="mx-1">—</span>
+              <span>
+                {modalFormattedDatas[modalFormattedDatas?.length - 1]?.name}
+              </span>
+              )
+            </span>
+          </div>
         </Modal.Title>
         <span role="button" onClick={() => dispatch(toogleModal(false))}>
           <Icon name="AiOutlineClose" size={28} />
         </span>
       </Modal.Header>
       <Modal.Body style={{ width: '100%', height: '500px' }}>
+        <div className={styles['crypto-sub-info']}>
+          <div className="d-flex flex-column justify-content-between align-items-center">
+            <span className={styles['crypto-sub-info-title']}>Market Cap</span>
+            <span className={styles['crypto-sub-info-text']}>
+              {formatCap(cryptoInfos?.cap!)}
+            </span>
+          </div>
+
+          <div className="d-flex">
+            <div className="d-flex flex-column justify-content-between align-items-center mx-2 mx-md-5">
+              <span className={styles['crypto-sub-info-title']}>
+                Current Value
+              </span>
+              <span className={styles['crypto-sub-info-text']}>
+                {formatCap(cryptoInfos?.rate!)}
+              </span>
+            </div>
+            <div className="d-flex flex-column justify-content-between align-items-center">
+              <span className={styles['crypto-sub-info-title']}>
+                Highest Value
+              </span>
+              <span className={styles['crypto-sub-info-text']}>
+                {formatCap(cryptoInfos?.allTimeHighUSD!)}
+              </span>
+            </div>
+          </div>
+        </div>
         {modalFormattedDatas.length > 0 && (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="90%">
             <LineChart
               data={modalFormattedDatas}
               margin={{
@@ -98,6 +172,7 @@ const mapStateToProps = (state: RootState) => {
     isOpen: state.modal.isOpen,
     modalData: state.modal.modalData,
     cryptoName: state.modal.cryptoName,
+    cryptos: state.cryptos.cryptos,
   };
 };
 
