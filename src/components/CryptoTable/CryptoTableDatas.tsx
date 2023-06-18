@@ -5,8 +5,7 @@ import {
   formatPrice,
 } from '../../helpers/formats';
 import { useAppDispatch } from '../../App';
-import { fetchModalData, toogleModal } from '../../store/slices/Modal';
-import { handleGetSingleCrypto } from '../../store/saga/Api';
+import { fetchModalData } from '../../store/slices/Modal';
 
 type CryptoTableDatasProps = {
   cryptos: CryptoCurrency[];

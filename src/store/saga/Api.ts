@@ -1,6 +1,4 @@
 import { getMsMonthAgo } from '../../helpers/date';
-import { AppDispatch } from '../configureStore';
-import { setModalData } from '../slices/Modal';
 
 export const handleGetCryptos = async () => {
   const response = await fetch(

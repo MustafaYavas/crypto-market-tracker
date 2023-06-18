@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import CryptoTable from '../../components/CryptoTable/CryptoTable';
 import styles from './Prices.module.scss';
 import { getCurrentHour } from '../../helpers/date';
-import { handleGetCryptos } from '../../store/saga/Api';
 import { useAppDispatch } from '../../App';
 import Search from '../../components/Search/Search';
 import { RootState } from '../../store/configureStore';
