@@ -5,7 +5,7 @@ import {
   formatPrice,
 } from '../../helpers/formats';
 import { useAppDispatch } from '../../App';
-import { toogleModal } from '../../store/slices/Modal';
+import { fetchModalData, toogleModal } from '../../store/slices/Modal';
 import { handleGetSingleCrypto } from '../../store/saga/Api';
 
 type CryptoTableDatasProps = {
@@ -28,8 +28,9 @@ const CryptoTableDatas = ({ cryptos, limit }: CryptoTableDatasProps) => {
   };
 
   const handleOpenModal = (code: string) => {
-    handleGetSingleCrypto(code, dispatch);
-    dispatch(toogleModal(true));
+    dispatch(fetchModalData(code));
+    // handleGetSingleCrypto(code);
+    // dispatch(toogleModal(true));
   };
   return (
     <tbody>

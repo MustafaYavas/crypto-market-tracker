@@ -3,23 +3,30 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { filter } from '../../helpers/dataFunctions/filterCryptos';
 
 type cryptoState = {
+  isCryptosLoading: boolean;
   cryptos: CryptoCurrency[];
   searchText: string;
   searchedCryptos: CryptoCurrency[];
 };
 
 const initialCryptoState: cryptoState = {
+  isCryptosLoading: false,
   cryptos: [],
   searchText: '',
   searchedCryptos: [],
 };
 
-const cryptoSlice = createSlice({
+export const cryptoSlice = createSlice({
   name: 'crypto',
   initialState: initialCryptoState,
   reducers: {
-    fetchCryptos: (state, action: PayloadAction<CryptoCurrency[]>) => {
+    fetchCryptos: (state, action: PayloadAction<string>) => {
+      state.isCryptosLoading = true;
+      return state;
+    },
+    setCryptos: (state, action: PayloadAction<CryptoCurrency[]>) => {
       state.cryptos = action.payload;
+      state.isCryptosLoading = false;
     },
     searchCrypto: (state, action: PayloadAction<string>) => {
       const key = action.payload;
@@ -35,6 +42,10 @@ const cryptoSlice = createSlice({
   },
 });
 
-export const { fetchCryptos, searchCrypto, setSearchedCryptosAfterUpdate } =
-  cryptoSlice.actions;
+export const {
+  fetchCryptos,
+  setCryptos,
+  searchCrypto,
+  setSearchedCryptosAfterUpdate,
+} = cryptoSlice.actions;
 export default cryptoSlice.reducer;

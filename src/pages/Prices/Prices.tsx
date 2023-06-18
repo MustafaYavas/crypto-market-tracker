@@ -9,6 +9,7 @@ import Search from '../../components/Search/Search';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import CryptoModal from '../../components/CryptoModal/CryptoModal';
+import { fetchCryptos } from '../../store/slices/Crypto';
 
 type PricesProps = {
   searchText: string;
@@ -20,16 +21,18 @@ const Prices = ({ searchText }: PricesProps) => {
   const [order, setOrder] = useState('ascending');
   const dispatch = useAppDispatch();
 
-  handleGetCryptos(order, searchText, dispatch);
+  useEffect(() => {
+    dispatch(fetchCryptos(searchText));
+  }, []);
 
   useEffect(() => {
-    const timeout = setInterval(() => {
+    const interval = setInterval(() => {
       setCurrentTime(getCurrentHour());
-      handleGetCryptos(order, searchText, dispatch);
-    }, 30000);
+      dispatch(fetchCryptos(searchText));
+    }, 10000);
 
-    return () => clearTimeout(timeout);
-  }, [dispatch, order, searchText]);
+    return () => clearInterval(interval);
+  }, [dispatch, searchText]);
 
   const handleIncreaseLimit = () => {
     setLimit((prev) => prev + 50);

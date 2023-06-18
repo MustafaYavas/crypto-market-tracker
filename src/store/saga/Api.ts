@@ -1,14 +1,8 @@
-import { filter } from '../../helpers/dataFunctions/filterCryptos';
 import { getMsMonthAgo } from '../../helpers/date';
 import { AppDispatch } from '../configureStore';
-import { fetchCryptos, setSearchedCryptosAfterUpdate } from '../slices/Crypto';
 import { setModalData } from '../slices/Modal';
 
-export const handleGetCryptos = async (
-  order: string,
-  searchText: string,
-  dispatch: AppDispatch
-) => {
+export const handleGetCryptos = async () => {
   const response = await fetch(
     new Request('https://api.livecoinwatch.com/coins/list'),
     {
@@ -20,7 +14,7 @@ export const handleGetCryptos = async (
       body: JSON.stringify({
         currency: 'USD',
         sort: 'rank',
-        order,
+        order: 'ascending',
         offset: 0,
         limit: 500,
         meta: true,
@@ -33,18 +27,10 @@ export const handleGetCryptos = async (
   }
 
   const datas = await response.json();
-  dispatch(fetchCryptos(datas));
-  if (searchText) {
-    const searchedArray = filter(datas, searchText);
-    dispatch(setSearchedCryptosAfterUpdate(searchedArray));
-  }
   return datas;
 };
 
-export const handleGetSingleCrypto = async (
-  code: string,
-  dispatch: AppDispatch
-) => {
+export const handleGetSingleCrypto = async (code: string) => {
   const response = await fetch(
     new Request('https://api.livecoinwatch.com/coins/single/history'),
     {
@@ -67,7 +53,6 @@ export const handleGetSingleCrypto = async (
     throw new Error(response.statusText);
   }
 
-  const data = await response.json();
-  dispatch(setModalData({ datas: data.history, name: code }));
-  return data;
+  const { history } = await response.json();
+  return history;
 };
