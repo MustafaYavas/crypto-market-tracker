@@ -1,12 +1,13 @@
 import { RootState } from '../../store/configureStore';
 import Icon from '../Icon/Icon';
-import LoadingSkeleton from '../LoadingSkeleton/LoadingSkeleton';
+import LoadingSkeleton from '../Loading/LoadingSkeleton/LoadingSkeleton';
 import styles from './CryptoTable.module.scss';
 import CryptoTableDatas from './CryptoTableDatas';
 
 import { connect } from 'react-redux';
 
 type CryptoTableProps = {
+  isCryptosLoading: boolean;
   cryptos: CryptoCurrency[];
   limit: number;
   currentTime: string;
@@ -17,6 +18,7 @@ type CryptoTableProps = {
 };
 
 const CryptoTable = ({
+  isCryptosLoading,
   cryptos,
   limit,
   currentTime,
@@ -27,7 +29,7 @@ const CryptoTable = ({
 }: CryptoTableProps) => {
   return (
     <>
-      {cryptos.length === 0 && (
+      {isCryptosLoading && cryptos.length === 0 && (
         <div className="my-5 overflow-hidden">
           <LoadingSkeleton width={1500} height={750} />
         </div>
@@ -142,6 +144,7 @@ const mapStateToProps = (state: RootState) => {
     cryptos: state.cryptos.cryptos,
     searchText: state.cryptos.searchText,
     searchedCryptos: state.cryptos.searchedCryptos,
+    isCryptosLoading: state.cryptos.isCryptosLoading,
   };
 };
 

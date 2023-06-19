@@ -7,7 +7,7 @@ import {
   setSearchedCryptosAfterUpdate,
 } from '../slices/Crypto';
 import { filter } from '../../helpers/dataFunctions/filterCryptos';
-import { fetchModalData, setModalData, toogleModal } from '../slices/Modal';
+import { fetchModalData, setModalData } from '../slices/Modal';
 
 export const workFetchCryptos = function* ({ payload }: any) {
   const result: CryptoCurrency[] = yield call(handleGetCryptos);
@@ -25,7 +25,6 @@ export const workFetchModalDatas = function* ({ payload }: any) {
     payload
   );
   yield put(setModalData({ datas: result, name: payload }));
-  yield put(toogleModal(true));
 };
 
 const Saga = function* () {

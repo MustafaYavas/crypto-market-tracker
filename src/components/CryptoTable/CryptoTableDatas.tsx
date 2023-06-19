@@ -5,7 +5,7 @@ import {
   formatPrice,
 } from '../../helpers/formats';
 import { useAppDispatch } from '../../App';
-import { fetchModalData } from '../../store/slices/Modal';
+import { fetchModalData, toogleModal } from '../../store/slices/Modal';
 
 type CryptoTableDatasProps = {
   cryptos: CryptoCurrency[];
@@ -28,8 +28,7 @@ const CryptoTableDatas = ({ cryptos, limit }: CryptoTableDatasProps) => {
 
   const handleOpenModal = (code: string) => {
     dispatch(fetchModalData(code));
-    // handleGetSingleCrypto(code);
-    // dispatch(toogleModal(true));
+    dispatch(toogleModal(true));
   };
   return (
     <tbody>
