@@ -44,7 +44,7 @@ const CryptoModal = ({
   modalFormattedDatas = modalData?.map((data) => {
     return {
       name: getDateFromMs(data.date),
-      pv: data.rate,
+      pv: data.rate.toFixed(5),
       amt: formatPrice(data.rate),
     };
   });
@@ -59,7 +59,7 @@ const CryptoModal = ({
       className={styles.modal}
     >
       {isModalDatasLoading ? (
-        <LoadingSpinner height={300} />
+        <LoadingSpinner height={300} variant="light" />
       ) : (
         <>
           <Modal.Header className="d-flex justify-content-between align-items-center">
@@ -112,7 +112,7 @@ const CryptoModal = ({
               </div>
             </Modal.Title>
             <span role="button" onClick={() => dispatch(toogleModal(false))}>
-              <Icon name="AiOutlineClose" size={28} />
+              <Icon name="AiOutlineClose" size={28} color="white" />
             </span>
           </Modal.Header>
 
@@ -161,7 +161,11 @@ const CryptoModal = ({
                   <XAxis dataKey="name" hide />
                   <YAxis width={40} hide />
                   <Tooltip />
-                  <Legend />
+                  <Legend
+                    formatter={(value, entry, index) => (
+                      <span style={{ color: 'white' }}>{value}</span>
+                    )}
+                  />
                   <Line
                     name={cryptoName}
                     type="monotone"

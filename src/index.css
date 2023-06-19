@@ -143,6 +143,15 @@ body {
   letter-spacing: 0.1em;
 }
 
+/* modal & chart */
+.modal-content {
+  background-color: rgba(27, 23, 44, 0.8);
+}
+
+.recharts-surface > path {
+  stroke: white !important;
+}
+
 @media screen and (max-width: 768px) {
   .base-container {
     padding: 0 2rem;
